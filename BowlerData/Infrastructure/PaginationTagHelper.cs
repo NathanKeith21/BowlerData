@@ -30,7 +30,7 @@ namespace BowlerData.Infrastructure
         {
             IUrlHelper urlHelp = urlInfo.GetUrlHelper(ViewContext);
             TagBuilder finishedTag = new TagBuilder("div");
-            for(int i = 1; i <= PageInfo.NumPages; i++)
+            for (int i = 1; i <= PageInfo.NumPages; i++)
             {
                 TagBuilder individualTag = new TagBuilder("a");
 
