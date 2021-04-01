@@ -55,23 +55,24 @@ namespace BowlerData
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("teamIdpageNum",
-                    "Team/{teamId}/{team}/{pageNum}",
+                    "{team}/page{pageNum}",
                     new { Controller = "Home", Action = "Index"}
                     );
 
-                endpoints.MapControllerRoute("teamId",
-                    "Team/{teamId}/{team}",
+                endpoints.MapControllerRoute("pageNum",
+                    "page{pageNum}",
                     new { Controller = "Home", Action = "Index" }
                     );
 
-                endpoints.MapControllerRoute("pageNum",
-                    "{pageNum}",
-                    new { Controller = "Home", Action = "Index" }
+                endpoints.MapControllerRoute("teamId",
+                    "{team}",
+                    new { Controller = "Home", Action = "Index", page = 1 }
                     );
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
