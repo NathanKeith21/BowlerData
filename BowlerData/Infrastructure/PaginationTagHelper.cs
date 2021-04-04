@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+//This file builds the page number links at the bottom of the page
 namespace BowlerData.Infrastructure
 {
     [HtmlTargetElement("div", Attributes = "page-info")]
@@ -26,6 +26,10 @@ namespace BowlerData.Infrastructure
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; }
+        public string PageClass { get; set; }
+        public string PageClassSelected { get; set; }
+        public string PageClassNormal { get; set; }
+        //This method builds the page number buttons on the bottom of the page, including styling
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             IUrlHelper urlHelp = urlInfo.GetUrlHelper(ViewContext);
@@ -36,6 +40,8 @@ namespace BowlerData.Infrastructure
 
                 KeyValuePairs["pageNum"] = i;
                 individualTag.Attributes["href"] = urlHelp.Action("Index", KeyValuePairs);
+                individualTag.AddCssClass(PageClass);
+                individualTag.AddCssClass(i == PageInfo.CurrentPage ? PageClassSelected : PageClassNormal);
                 individualTag.InnerHtml.Append(i.ToString());
                 finishedTag.InnerHtml.AppendHtml(individualTag);
             }

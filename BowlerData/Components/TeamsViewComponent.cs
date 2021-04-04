@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+//This file collects and brings in the info about the Teams
 namespace BowlerData.Components
 {
     public class TeamsViewComponent : ViewComponent
@@ -21,6 +21,5 @@ namespace BowlerData.Components
                 .Distinct()
                 .OrderBy(x => x));
         }
-
     }
 }

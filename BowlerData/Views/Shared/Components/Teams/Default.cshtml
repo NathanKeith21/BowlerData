@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<Teams>
-
-<a asp-action="Index" asp-controller="Home" asp-route-team="">Home</a>
+@*This component allows you to filter by team to only see the contact info of players from a certain team*@
+<a class="btn mb-2 @(ViewBag.TeamName == null ? "btn-primary" : "btn-outline-secondary")" style="width: 120px"
+   asp-action="Index" asp-controller="Home"
+   asp-route-team="">Home</a>
 <br />
 
 @foreach (var x in Model)
 {
-    <a asp-action="Index" asp-controller="Home"
+    <a class="btn mb-2 @(x.TeamName == ViewBag.TeamName ? "btn-primary" : "btn-outline-secondary")" style="width: 120px"
+       asp-action="Index" asp-controller="Home"
        asp-route-teamId="@x.TeamId"
-       asp-route-team="@x.TeamName">
+       asp-route-team="@x.TeamName"
+       asp-route-pagenum="1">
     @x.TeamName</a>
     <br />
 }

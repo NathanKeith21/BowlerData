@@ -8,24 +8,31 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    @*This lists the name of the team whose player contact info is being displayed*@
+    <div class="text-center">
+        @if (ViewBag.TeamName == null)
+        {
+            <h1>Bowler Contact Info</h1>
+        }
+        @if (ViewBag.TeamName != null)
+        {
+            <h1>@Model.TeamName</h1>
+        }
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            @*This displays the filtering by team buttons*@
+            <div class="col-2">
                 <vc:teams />
             </div>
-            <div class="col-8">
+            @*This displays the contact info of the players*@
+            <div class="col-4">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
             </div>
         </div>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - BowlerData
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

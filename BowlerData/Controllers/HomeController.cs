@@ -21,19 +21,21 @@ namespace BowlerData.Controllers
             _logger = logger;
             _context = context;
         }
-
+        
         public IActionResult Index(int? teamId, string team, int pageNum = 0)
         {
             int pageSize = 5;
+            ViewBag.TeamName = team;
 
             return View(new IndexViewModel
             {
+                //This prepares the Bowler data that should be outputted on the page
                 Bowlers = (_context.Bowlers
                 .FromSqlInterpolated($"SELECT * FROM Bowlers WHERE TeamId = {teamId} OR {teamId} IS NULL ORDER BY BowlerLastName, BowlerFirstName")
                 .Skip(pageSize * (pageNum - 1))
                 .Take(pageSize)
                 .ToList()),
-
+                //This prepares the Page Number data that should be outputted on the page
                 PageNumberingInfo = new PageNumberingInfo
                 {
                     NumItemsPerPage = pageSize,
@@ -41,7 +43,7 @@ namespace BowlerData.Controllers
                     TotalNumItems = (teamId == null ? _context.Bowlers.Count() :
                         _context.Bowlers.Where(x => x.TeamId == teamId).Count())
                 },
-
+                //This keeps track of the Team Name to output on the page
                 TeamName = team
             }); ;
     }

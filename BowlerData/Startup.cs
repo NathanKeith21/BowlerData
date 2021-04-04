@@ -51,12 +51,17 @@ namespace BowlerData
             app.UseRouting();
 
             app.UseAuthorization();
-
+            //This allows you to get readable url links, including which team you are viewing and which page of results
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("teamIdpageNum",
-                    "{team}/page{pageNum}",
+                    "{teamId}/{team}/page{pageNum}",
                     new { Controller = "Home", Action = "Index"}
+                    );
+
+                endpoints.MapControllerRoute("teamId",
+                    "{teamId}/{team}",
+                    new { Controller = "Home", Action = "Index" }
                     );
 
                 endpoints.MapControllerRoute("pageNum",
@@ -64,15 +69,9 @@ namespace BowlerData
                     new { Controller = "Home", Action = "Index" }
                     );
 
-                endpoints.MapControllerRoute("teamId",
-                    "{team}",
-                    new { Controller = "Home", Action = "Index", page = 1 }
-                    );
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapDefaultControllerRoute();
             });
         }
     }

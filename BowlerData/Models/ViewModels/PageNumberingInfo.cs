@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+//This file has the model info for page numbers, including for how many results to show
 namespace BowlerData.Models.ViewModels
 {
     public class PageNumberingInfo
